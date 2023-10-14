@@ -4,8 +4,9 @@ import json
 import requests
 
 def queryFrames(char, movestring):
-    results = requests.get("https://rbnorway-t7.web.app/assets/frames/t7/{}T7.json".format(char))
-    movelist = results.json()[0]['moves']
+    movelist_path = os.getcwd() + "/tekken7/" + str(char) + ".json"
+    with open(movelist_path) as movelist_file:
+        movelist = json.load(movelist_file)
     for move in movelist:
         if movestring.lower() == "ra":
             print(moveDictionary(movelist[0]))
